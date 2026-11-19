@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <meta name="description" content="Maison Raanana, salon de coiffure et de beauté. Coupes, colorations, balayages et soins personnalisés.">
+  <title>Maison Raanana — Salon de coiffure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #faf9f6;
+      --white: #fff;
+      --ink: #1e1e1e;
+      --muted: #716e68;
+      --accent: #b89468;
+      --line: #e8e3dc;
+      --soft: #f1eee8;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+      --header-height: 82px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    body.menu-open { overflow: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .wrap { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow { color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; }
+    .section { padding-block: 108px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 42px; }
+    .section-heading h2 { margin: 12px 0 0; font-size: clamp(38px, 5vw, 58px); letter-spacing: -.035em; line-height: 1.08; }
+    .section-intro { max-width: 370px; margin-bottom: 2px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; gap: 11px; padding: 0 23px; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; transition: background .2s, color .2s, border-color .2s, transform .2s; }
+    .button:hover { transform: translateY(-2px); border-color: var(--accent); background: var(--accent); }
+    .button-light { border-color: var(--white); background: var(--white); color: var(--ink); }
+    .button-light:hover { border-color: var(--accent); color: var(--white); }
+
+    /* Navigation */
+    .topbar { position: fixed; z-index: 20; inset: 0 0 auto; height: var(--header-height); border-bottom: 1px solid transparent; transition: background .25s, border-color .25s, box-shadow .25s; }
+    .topbar.scrolled { border-color: var(--line); background: rgba(250, 249, 246, .96); box-shadow: 0 4px 22px rgba(30, 30, 30, .04); backdrop-filter: blur(12px); }
+    .topbar-inner { display: flex; height: 100%; align-items: center; justify-content: space-between; gap: 30px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; }
+    .brand-mark { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--accent); border-radius: 50%; color: var(--accent); font-family: var(--serif); font-size: 19px; }
+    .brand-name { display: block; font-family: var(--serif); font-size: 17px; letter-spacing: .04em; }
+    .brand-sub { display: block; margin-top: 2px; color: var(--muted); font-size: 8px; letter-spacing: .2em; text-transform: uppercase; }
+    .main-nav { display: flex; align-items: center; gap: clamp(18px, 2.5vw, 35px); font-size: 11px; }
+    .main-nav > a:not(.button) { position: relative; padding-block: 10px; }
+    .main-nav > a:not(.button)::after { position: absolute; right: 0; bottom: 3px; left: 0; height: 1px; background: var(--accent); content: ""; transform: scaleX(0); transform-origin: left; transition: transform .2s; }
+    .main-nav > a:not(.button):hover::after { transform: scaleX(1); }
+    .main-nav .button { min-height: 42px; padding-inline: 16px; font-size: 9px; }
+    .menu-toggle { display: none; width: 44px; height: 44px; place-items: center; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 17px; cursor: pointer; }
+
+    /* Hero */
+    .hero { position: relative; display: flex; min-height: min(760px, 100svh); align-items: center; overflow: hidden; padding: calc(var(--header-height) + 60px) 0 65px; background: #66564a url("https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=2200&q=88") center 42% / cover no-repeat; color: var(--white); }
+    .hero::before { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20, 19, 17, .72) 0%, rgba(20, 19, 17, .48) 45%, rgba(20, 19, 17, .08) 100%); content: ""; }
+    .hero-content { position: relative; width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+    .hero .eyebrow { color: #e1c7a6; }
+    .hero h1 { max-width: 680px; margin: 20px 0 19px; font-size: clamp(48px, 7.5vw, 90px); letter-spacing: -.04em; line-height: 1.02; }
+    .hero h1 em { color: #e1c7a6; font-weight: 400; }
+    .hero-copy { max-width: 470px; margin-bottom: 28px; color: rgba(255,255,255,.82); font-size: 14px; line-height: 1.85; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 45px; color: rgba(255,255,255,.8); font-size: 10px; letter-spacing: .08em; }
+    .hero-note i { color: #e1c7a6; }
+    .hero-scroll { position: absolute; right: 24px; bottom: 35px; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,.75); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; writing-mode: vertical-rl; }
+    .hero-scroll::after { width: 1px; height: 42px; background: var(--accent); content: ""; }
+    .ticker { padding: 18px 12px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 9px; font-weight: 600; letter-spacing: .2em; text-align: center; text-transform: uppercase; }
+    .ticker span { padding-inline: 19px; color: var(--accent); }
+
+    /* Services */
+    .service-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .service-tab { min-height: 40px; padding: 0 17px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 10px; cursor: pointer; transition: .2s; }
+    .service-tab:hover, .service-tab[aria-selected="true"] { border-color: var(--ink); background: var(--ink); color: var(--white); }
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+    .service { min-height: 225px; padding: 27px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); animation: rise .35s both; }
+    .service:nth-child(3n) { border-right: 0; }
+    .service:nth-last-child(-n+3) { border-bottom: 0; }
+    .service-number { color: var(--accent); font-size: 9px; letter-spacing: .12em; }
+    .service h3 { margin: 28px 0 9px; font-size: 24px; }
+    .service p { min-height: 39px; margin-bottom: 21px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .service-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 15px; border-top: 1px solid var(--line); }
+    .service-price { font-family: var(--serif); font-size: 21px; }
+    .service-duration { color: var(--muted); font-size: 9px; }
+
+    /* Lookbook */
+    .lookbook { background: var(--soft); }
+    .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 12px; }
+    .gallery-item { position: relative; overflow: hidden; background: #ddd5ca; }
+    .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-row: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .65s cubic-bezier(.2,.7,.2,1); }
+    .gallery-item:hover img { transform: scale(1.055); }
+    .gallery-item::after { position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.52)); content: ""; opacity: 0; transition: opacity .25s; }
+    .gallery-item:hover::after { opacity: 1; }
+    .gallery-caption { position: absolute; z-index: 1; right: 17px; bottom: 16px; left: 17px; color: white; font-family: var(--serif); font-size: 18px; opacity: 0; transform: translateY(5px); transition: .25s; }
+    .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
+
+    /* Salon and team */
+    .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 70px; }
+    .about-photo { position: relative; min-height: 500px; background: #ded8ce; }
+    .about-photo img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+    .about-text h2 { max-width: 510px; margin: 14px 0 20px; font-size: clamp(38px, 5vw, 58px); line-height: 1.08; }
+    .about-text > p { max-width: 470px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .about-quote { margin-top: 26px; padding: 18px 0 18px 22px; border-left: 1px solid var(--accent); color: var(--ink); font-family: var(--serif); font-size: 20px; line-height: 1.55; }
+    .team { padding-top: 0; }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .team-card { background: var(--white); }
+    .team-card img { width: 100%; height: 310px; object-fit: cover; }
+    .team-info { padding: 20px 21px 22px; }
+    .team-info h3 { margin-bottom: 5px; font-size: 23px; }
+    .team-info p { margin: 0; color: var(--muted); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+
+    /* Reviews */
+    .reviews { background: var(--ink); color: var(--white); }
+    .reviews .eyebrow { color: #d7b993; }
+    .reviews .section-intro { color: #bbb8b2; }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .review-card { padding: 28px; border: 1px solid rgba(255,255,255,.2); }
+    .stars { margin-bottom: 20px; color: #d7b993; font-size: 11px; letter-spacing: .15em; }
+    .review-card blockquote { min-height: 100px; margin: 0 0 22px; color: #eeeae3; font-family: var(--serif); font-size: 20px; line-height: 1.55; }
+    .review-author { color: #bdb9b2; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+
+    /* Contact and booking */
+    .contact-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 60px; }
+    .contact-info h2 { margin: 13px 0 28px; font-size: clamp(38px, 5vw, 56px); line-height: 1.08; }
+    .detail { display: grid; grid-template-columns: 102px 1fr; gap: 15px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 11px; line-height: 1.7; }
+    .detail-label { color: var(--muted); }
+    .detail a:hover { color: var(--accent); }
+    .social-links { display: flex; gap: 17px; margin-top: 22px; }
+    .social-links a { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid var(--line); color: var(--ink); font-size: 13px; transition: .2s; }
+    .social-links a:hover { border-color: var(--ink); background: var(--ink); color: var(--white); }
+    .booking { padding: 32px; background: var(--soft); }
+    .booking h3 { margin: 11px 0 7px; font-size: 30px; }
+    .booking-intro { margin-bottom: 23px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field-full { grid-column: 1 / -1; }
+    .field label { color: #514e49; font-size: 10px; font-weight: 600; }
+    .field input, .field select { width: 100%; min-height: 46px; padding: 0 12px; border: 1px solid #dcd6cd; border-radius: 0; background: var(--paper); color: var(--ink); font-size: 11px; }
+    .field input::placeholder { color: #99938a; }
+    .booking .button { margin-top: 19px; cursor: pointer; }
+    .form-message { min-height: 18px; margin: 13px 0 0; color: #655640; font-size: 11px; line-height: 1.6; }
+    .map-wrap { height: 280px; margin-top: 55px; border: 0; background: #e6e1d8; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: grayscale(1) contrast(.9); }
+
+    /* Footer */
+    footer { padding: 38px 0 20px; background: #efede8; }
+    .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; padding-bottom: 30px; }
+    .footer-note { margin: 9px 0 0; color: var(--muted); font-size: 10px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 22px; color: #55514b; font-size: 10px; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 18px; border-top: 1px solid #ddd8d0; color: var(--muted); font-size: 9px; }
+    .footer-bottom a:hover { color: var(--ink); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      :root { --header-height: 72px; }
+      .main-nav { gap: 15px; }
+      .main-nav .button { padding-inline: 11px; }
+      .gallery { grid-auto-rows: 180px; }
+      .about-grid { gap: 40px; }
+      .contact-grid { gap: 35px; }
+      .team-card img { height: 260px; }
+    }
+    @media (max-width: 700px) {
+      .wrap, .hero-content { width: calc(100% - 36px); }
+      .topbar { background: rgba(250,249,246,.96); border-bottom-color: var(--line); }
+      .menu-toggle { display: grid; }
+      .main-nav { position: absolute; inset: 100% 0 auto; display: flex; max-height: calc(100svh - var(--header-height)); align-items: stretch; flex-direction: column; gap: 0; overflow-y: auto; padding: 18px 25px 35px; background: var(--paper); opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity .2s, transform .2s; }
+      .main-nav.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+      .main-nav > a:not(.button) { padding: 17px 0; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 25px; }
+      .main-nav > a:not(.button)::after { display: none; }
+      .main-nav .button { align-self: flex-start; margin-top: 22px; padding-inline: 19px; }
+      .hero { min-height: 690px; min-height: min(740px, 100svh); padding-top: calc(var(--header-height) + 48px); background-position: 58% center; }
+      .hero::before { background: linear-gradient(90deg, rgba(20,19,17,.72), rgba(20,19,17,.35)); }
+      .hero h1 { font-size: clamp(46px, 13vw, 68px); }
+      .hero-copy { max-width: 390px; font-size: 13px; }
+      .hero-note { margin-top: 33px; }
+      .hero-scroll { right: 12px; bottom: 22px; }
+      .ticker { font-size: 8px; letter-spacing: .14em; }
+      .ticker span { padding-inline: 7px; }
+      .section { padding-block: 76px; }
+      .section-heading { display: block; margin-bottom: 30px; }
+      .section-intro { margin-top: 17px; }
+      .services { grid-template-columns: 1fr 1fr; }
+      .service { min-height: 210px; padding: 20px; }
+      .service:nth-child(3n) { border-right: 1px solid var(--line); }
+      .service:nth-child(2n) { border-right: 0; }
+      .service:nth-last-child(-n+3) { border-bottom: 1px solid var(--line); }
+      .service:nth-last-child(-n+2) { border-bottom: 0; }
+      .service h3 { margin-top: 22px; font-size: 21px; }
+      .service p { min-height: 52px; }
+      .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 165px; gap: 8px; }
+      .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+      .gallery-item:nth-child(4) { grid-row: span 1; }
+      .gallery-caption { opacity: 1; transform: none; font-size: 15px; }
+      .gallery-item::after { opacity: 1; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-photo { min-height: 380px; }
+      .team { padding-top: 0; }
+      .team-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .team-card img { height: 220px; }
+      .team-info { padding: 15px; }
+      .team-info h3 { font-size: 19px; }
+      .team-info p { font-size: 8px; }
+      .review-grid { grid-template-columns: 1fr; }
+      .review-card { padding: 23px; }
+      .review-card blockquote { min-height: 0; }
+      .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      .booking { padding: 24px 18px; }
+      .map-wrap { height: 240px; margin-top: 36px; }
+      .footer-main { align-items: flex-start; flex-direction: column; }
+      .footer-links { gap: 15px; }
+    }
+    @media (max-width: 390px) {
+      .brand-name { font-size: 15px; }
+      .brand-mark { width: 36px; height: 36px; }
+      .hero h1 { font-size: 44px; }
+      .hero-actions .button { min-height: 46px; padding-inline: 15px; font-size: 9px; }
+      .services { grid-template-columns: 1fr; }
+      .service, .service:nth-child(3n), .service:nth-child(2n) { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .service:last-child { border-bottom: 0; }
+      .service p { min-height: 0; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field-full { grid-column: auto; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" id="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#accueil" aria-label="Maison Raanana, accueil">
+        <span class="brand-mark">M</span>
+        <span><span class="brand-name" data-salon="name">Maison Raanana</span><span class="brand-sub">Coiffure & beauté</span></span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a>
+        <a href="#prestations">Prestations</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#equipe">L'équipe</a>
+        <a href="#contact">Contact</a>
+        <a class="button" href="#contact">Prendre rendez-vous <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="eyebrow">Salon de coiffure · Raanana</div>
+        <h1 id="hero-title">Révélez l'éclat naturel <em>de vos cheveux.</em></h1>
+        <p class="hero-copy">Une expertise attentive, des gestes précis et un vrai moment pour vous. Nous imaginons avec vous le style qui vous ressemble.</p>
+        <div class="hero-actions">
+          <a class="button button-light" href="#contact">Prendre rendez-vous <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="button" href="#prestations">Découvrir nos soins</a>
+        </div>
+        <div class="hero-note"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span data-salon="address">12 rue Bar-Ilan, Raanana</span></div>
+      </div>
+      <a class="hero-scroll" href="#prestations" aria-label="Défiler vers les prestations">Défiler</a>
+    </section>
+
+    <div class="ticker">L'écoute avant tout <span>✳</span> Des gestes experts <span>✳</span> La beauté au naturel</div>
+
+    <section class="wrap section" id="prestations">
+      <div class="section-heading reveal">
+        <div><div class="eyebrow">La carte du salon</div><h2>Le soin juste,<br>pour vos cheveux.</h2></div>
+        <p class="section-intro">Chaque rendez-vous commence par une consultation personnalisée. Tarifs indicatifs à valider avant publication.</p>
+      </div>
+      <div class="service-tabs reveal" role="tablist" aria-label="Catégories de prestations">
+        <button class="service-tab" type="button" role="tab" aria-selected="true" data-filter="femme">Femme</button>
+        <button class="service-tab" type="button" role="tab" aria-selected="false" data-filter="homme">Homme</button>
+        <button class="service-tab" type="button" role="tab" aria-selected="false" data-filter="coloration">Coloration & balayage</button>
+        <button class="service-tab" type="button" role="tab" aria-selected="false" data-filter="soins">Soins profonds</button>
+      </div>
+      <div class="services" id="service-list" aria-live="polite"></div>
+    </section>
+
+    <section class="lookbook" id="galerie">
+      <div class="wrap section">
+        <div class="section-heading reveal">
+          <div><div class="eyebrow">Le lookbook</div><h2>Des cheveux,<br>des histoires.</h2></div>
+          <p class="section-intro">Une sélection de créations du salon, pensées pour révéler votre personnalité et la beauté de vos cheveux.</p>
+        </div>
+        <div class="gallery">
+          <figure class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=85" alt="Mise en beauté aux cheveux longs" loading="lazy"><figcaption class="gallery-caption">Lumière naturelle</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=700&q=85" alt="Coiffure réalisée en salon" loading="lazy"><figcaption class="gallery-caption">Coupe signature</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=700&q=85" alt="Cheveux brillants et soin professionnel" loading="lazy"><figcaption class="gallery-caption">Soin & éclat</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=85" alt="Portrait mettant en valeur une coiffure" loading="lazy"><figcaption class="gallery-caption">Balayage doux</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=700&q=85" alt="Portrait avec une coupe élégante" loading="lazy"><figcaption class="gallery-caption">Le détail qui change tout</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85" alt="Cheveux coiffés avec mouvement naturel" loading="lazy"><figcaption class="gallery-caption">Mouvement naturel</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="atelier">
+      <div class="about-grid">
+        <div class="about-photo reveal"><img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=1000&q=85" alt="Coiffure réalisée avec soin au salon" loading="lazy"></div>
+        <div class="about-text reveal">
+          <div class="eyebrow">L'esprit Maison Raanana</div>
+          <h2>La beauté commence par l'écoute.</h2>
+          <p>Nous croyons qu'une belle coiffure est d'abord celle dans laquelle on se sent soi-même. Ici, nous prenons le temps de comprendre vos envies, votre quotidien et la nature de vos cheveux, avant de vous conseiller avec sincérité.</p>
+          <p>Des produits soigneusement choisis, une approche respectueuse et une équipe passionnée : tout est pensé pour que votre visite soit aussi agréable que le résultat.</p>
+          <div class="about-quote">« Le plus beau style est celui qui vous ressemble. »</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section team" id="equipe">
+      <div class="section-heading reveal">
+        <div><div class="eyebrow">Les mains expertes</div><h2>Une équipe à votre écoute.</h2></div>
+        <p class="section-intro">De la première conversation au dernier coup de brosse, nos stylistes mettent leur savoir-faire au service de vos envies. Portraits d'illustration à remplacer par les photos de l'équipe.</p>
+      </div>
+      <div class="team-grid">
+        <article class="team-card reveal"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=700&q=85" alt="Portrait d'une coiffeuse coloriste" loading="lazy"><div class="team-info"><h3>Coloriste</h3><p>Balayage & lumière</p></div></article>
+        <article class="team-card reveal"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=85" alt="Portrait d'un coiffeur styliste" loading="lazy"><div class="team-info"><h3>Styliste</h3><p>Coupe & coiffage</p></div></article>
+        <article class="team-card reveal"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=700&q=85" alt="Portrait d'une styliste spécialisée dans les soins" loading="lazy"><div class="team-info"><h3>Experte capillaire</h3><p>Soins & boucles</p></div></article>
+      </div>
+    </section>
+
+    <section class="reviews">
+      <div class="wrap section">
+        <div class="section-heading reveal">
+          <div><div class="eyebrow">Vos mots nous touchent</div><h2>Le plus beau reflet,<br>c'est votre sourire.</h2></div>
+          <p class="section-intro">Exemples de textes à remplacer par les avis authentiques de votre clientèle.</p>
+        </div>
+        <div class="review-grid">
+          <article class="review-card reveal"><div class="stars" aria-label="Exemple de note cinq étoiles">★★★★★</div><blockquote>« Une équipe adorable, à l'écoute, et un résultat exactement comme je l'imaginais. Je reviendrai sans hésiter. »</blockquote><div class="review-author">Exemple d'avis · À remplacer</div></article>
+          <article class="review-card reveal"><div class="stars" aria-label="Exemple de note cinq étoiles">★★★★★</div><blockquote>« Très belle expérience du début à la fin. Le conseil couleur était parfait et mes cheveux n'ont jamais été aussi lumineux. »</blockquote><div class="review-author">Exemple d'avis · À remplacer</div></article>
+          <article class="review-card reveal"><div class="stars" aria-label="Exemple de note cinq étoiles">★★★★★</div><blockquote>« Un salon élégant et chaleureux où l'on se sent tout de suite bien. Merci pour votre professionnalisme et votre douceur. »</blockquote><div class="review-author">Exemple d'avis · À remplacer</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="contact">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="eyebrow">À votre prochain rendez-vous</div>
+          <h2>On prend soin<br>de vous ?</h2>
+          <div class="detail"><span class="detail-label">Adresse</span><span class="detail-value" data-salon="address">12 rue Bar-Ilan, Raanana</span></div>
+          <div class="detail"><span class="detail-label">Téléphone</span><a class="detail-value" data-phone-link href="tel:+972000000000" data-salon="phone">À renseigner</a></div>
+          <div class="detail"><span class="detail-label">Horaires</span><span class="detail-value" data-salon="hours">Dim–Jeu · 9h–19h<br>Ven · 9h–14h</span></div>
+          <div class="social-links" aria-label="Réseaux sociaux">
+            <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://www.tiktok.com/" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <form class="booking reveal" id="booking-form">
+          <div class="eyebrow">Demande de réservation</div>
+          <h3>Votre moment, à vous.</h3>
+          <p class="booking-intro">Dites-nous ce qui vous ferait plaisir. Nous vous recontacterons pour confirmer votre créneau.</p>
+          <div class="form-grid">
+            <div class="field"><label for="client-name">Nom complet</label><input id="client-name" name="name" autocomplete="name" placeholder="Votre nom" required></div>
+            <div class="field"><label for="client-phone">Téléphone</label><input id="client-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972 ..." required></div>
+            <div class="field field-full"><label for="service-choice">Prestation souhaitée</label><select id="service-choice" name="service" required><option value="" selected disabled>Choisir une prestation</option><option>Coupe femme</option><option>Coupe homme</option><option>Coloration & balayage</option><option>Soin profond</option><option>Conseil personnalisé</option></select></div>
+            <div class="field field-full"><label for="appointment-date">Date souhaitée</label><input id="appointment-date" name="date" type="date" required></div>
+          </div>
+          <button class="button" type="submit">Préparer ma demande <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+          <p class="form-message" id="form-message" aria-live="polite">La demande sera préparée dans votre application e-mail.</p>
+        </form>
+      </div>
+      <div class="map-wrap reveal" aria-label="Carte pour trouver le salon">
+        <iframe title="Carte du quartier du salon à Raanana" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Bar%20Ilan%20Street%2C%20Raanana%2C%20Israel&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-main">
+        <div><a class="brand" href="#accueil"><span class="brand-mark">M</span><span><span class="brand-name" data-salon="name">Maison Raanana</span><span class="brand-sub">Coiffure & beauté</span></span></a><p class="footer-note">Un moment de beauté, tout simplement.</p></div>
+        <nav class="footer-links" aria-label="Navigation de pied de page"><a href="#prestations">Prestations</a><a href="#galerie">Galerie</a><a href="#equipe">L'équipe</a><a href="#contact">Contact</a><a href="#mentions">Mentions légales</a></nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> <span data-salon="name">Maison Raanana</span>. Tous droits réservés.</span><a href="#mentions">Mentions légales</a><a href="#accueil">Retour en haut ↑</a></div>
+      <p class="footer-note" id="mentions">Mentions légales à compléter : nom et coordonnées de l'éditeur, forme juridique, numéro d'immatriculation et hébergeur du site.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Personnalisez ici l'identité et les coordonnées réelles du salon.
+    const salon = {
+      name: "Maison Raanana",
+      address: "12 rue Bar-Ilan, Raanana",
+      phone: "",
+      phoneLink: "",
+      hours: "Dim–Jeu · 9h–19h | Ven · 9h–14h",
+      bookingEmail: "",
+      services: {
+        femme: [
+          { name: "Coupe & brushing", description: "Diagnostic, coupe personnalisée et brushing soigné.", price: "À partir de 180 ₪", duration: "60 min" },
+          { name: "Brushing", description: "Un coiffage souple et lumineux, adapté à vos envies.", price: "À partir de 100 ₪", duration: "40 min" },
+          { name: "Coupe transformation", description: "Un changement de style guidé par une consultation.", price: "À partir de 220 ₪", duration: "75 min" }
+        ],
+        homme: [
+          { name: "Coupe & coiffage", description: "Une coupe précise, facile à porter au quotidien.", price: "À partir de 120 ₪", duration: "40 min" },
+          { name: "Coupe aux ciseaux", description: "Travail de forme et finitions soignées.", price: "À partir de 150 ₪", duration: "50 min" },
+          { name: "Coupe enfant", description: "Un rendez-vous tout en douceur pour les plus jeunes.", price: "À partir de 90 ₪", duration: "30 min" }
+        ],
+        coloration: [
+          { name: "Coloration racines", description: "Une couleur harmonieuse et un résultat naturel.", price: "À partir de 250 ₪", duration: "90 min" },
+          { name: "Balayage lumineux", description: "Des reflets délicats pour apporter dimension et lumière.", price: "À partir de 450 ₪", duration: "150 min" },
+          { name: "Gloss & patine", description: "Ravivez vos reflets et apportez une brillance miroir.", price: "À partir de 180 ₪", duration: "45 min" }
+        ],
+        soins: [
+          { name: "Soin réparateur", description: "Un rituel nourrissant adapté à la nature du cheveu.", price: "À partir de 160 ₪", duration: "45 min" },
+          { name: "Rituel cuir chevelu", description: "Massage relaxant et soin purifiant en profondeur.", price: "À partir de 140 ₪", duration: "40 min" },
+          { name: "Soin profond & brushing", description: "Un soin ciblé suivi d'un coiffage tout en douceur.", price: "À partir de 240 ₪", duration: "75 min" }
+        ]
+      }
+    };
+
+    document.querySelectorAll("[data-salon]").forEach((element) => {
+      const value = salon[element.dataset.salon];
+      if (value) element.textContent = value;
+    });
+
+    document.querySelectorAll("[data-phone-link]").forEach((link) => {
+      if (salon.phoneLink) {
+        link.href = `tel:${salon.phoneLink}`;
+        link.textContent = salon.phone || "Nous appeler";
+      } else {
+        link.removeAttribute("href");
+        link.textContent = "Téléphone à renseigner";
+        link.setAttribute("aria-label", "Ajoutez le numéro de téléphone du salon dans la configuration");
+      }
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const serviceList = document.getElementById("service-list");
+    const tabs = [...document.querySelectorAll(".service-tab")];
+    function renderServices(category) {
+      serviceList.innerHTML = salon.services[category].map((service, index) => `
+        <article class="service">
+          <span class="service-number">0${index + 1} / PRESTATION</span>
+          <h3>${service.name}</h3>
+          <p>${service.description}</p>
+          <div class="service-bottom"><span class="service-price">${service.price}</span><span class="service-duration">${service.duration}</span></div>
+        </article>
+      `).join("");
+    }
+    tabs.forEach((tab) => tab.addEventListener("click", () => {
+      tabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+      renderServices(tab.dataset.filter);
+    }));
+    renderServices("femme");
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const mainNav = document.getElementById("main-nav");
+    function closeMenu() {
+      mainNav.classList.remove("is-open");
+      document.body.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+      menuToggle.innerHTML = '<i class="fa-solid fa-bars" aria-hidden="true"></i>';
+    }
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") !== "true";
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+      menuToggle.innerHTML = `<i class="fa-solid fa-${isOpen ? "xmark" : "bars"}" aria-hidden="true"></i>`;
+      mainNav.classList.toggle("is-open", isOpen);
+      document.body.classList.toggle("menu-open", isOpen);
+    });
+    mainNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+    window.addEventListener("resize", () => { if (window.innerWidth > 700) closeMenu(); });
+
+    const topbar = document.getElementById("topbar");
+    function updateHeader() { topbar.classList.toggle("scrolled", window.scrollY > 24); }
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+
+    const revealItems = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach((item) => revealObserver.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+
+    const dateInput = document.getElementById("appointment-date");
+    const today = new Date();
+    dateInput.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+    document.getElementById("booking-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      if (!salon.bookingEmail) {
+        document.getElementById("form-message").textContent = "Merci ! Pour envoyer votre demande, ajoutez l'adresse e-mail du salon dans la configuration du fichier.";
+        return;
+      }
+      const data = new FormData(form);
+      const subject = encodeURIComponent(`Demande de rendez-vous — ${data.get("name")}`);
+      const body = encodeURIComponent(`Bonjour,\n\nJe souhaite prendre rendez-vous.\n\nNom : ${data.get("name")}\nTéléphone : ${data.get("phone")}\nPrestation : ${data.get("service")}\nDate souhaitée : ${data.get("date")}\n\nMerci !`);
+      window.location.href = `mailto:${salon.bookingEmail}?subject=${subject}&body=${body}`;
+      document.getElementById("form-message").textContent = "Votre application e-mail va s'ouvrir avec votre demande préremplie. Envoyez le message pour la transmettre au salon.";
+    });
+  </script>
+</body>
+</html>
